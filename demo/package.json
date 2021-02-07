@@ -1,0 +1,9 @@
+{
+  "name": "xor_encrypt_demo",
+  "version": "1.0.0",
+  "dependencies": {
+    "bootstrap": "^3.4.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.5.1"
+  }
+}

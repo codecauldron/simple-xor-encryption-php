@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XOR encryption Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script>
+    const METHOD_ENCRYPT = 1;
+    const METHOD_DECRYPT = 2;
+
+    $(document).ready(function () {
+      $("#generateKey").click(function () {
+        let key = "";
+        const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#€%&/()=?+-_:.;,<>§*^£$|[]";
+        const keyLength = Math.floor(Math.random() * 15) + 10;
+        for (let i = 0; i < keyLength; i++) {
+          key += possible.charAt(Math.floor(Math.random() * possible.length));
+        }
+        $("#key").html(key);
+      });
+
+      $("#method1").val(METHOD_ENCRYPT).attr("checked", true);
+      $("#method2").val(METHOD_DECRYPT);
+
+      $("#go").click(function () {
+        const method = $("#method1").is(":checked") ? METHOD_ENCRYPT : METHOD_DECRYPT;
+        const iterations = $("#iterations").val();
+        const key = $("#key").val();
+        const message = $("#message").val();
+
+        $.post({
+          url: "do.php",
+          data: {
+            key: key,
+            method: method,
+            message: message,
+            iterations: iterations,
+          },
+          success: function (data) {
+            $("#result").html(data);
+          },
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+<div class="container-fluid">
+  <div class="col-xs-12">
+    <h2>Simple XOR encryption</h2>
+    <p>
+      Type in your message and key in the boxes below. Select if you want to encrypt och decrypt the message and how
+      many times you want to encrypt or decrypt the message. If you&apos;re trying to decrypt a message, both the key
+      and the iterations value must be the same as when the message was encrypted. When encrypting a message the result
+      will be displayed as a Base64 encoded string. Likewise, when decoding a message the message should be a Base64
+      encoded string.
+    </p>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <label for="message"><i class="fa fa-envelope"></i> Message</label><br/>
+    <textarea id="message" name="message" class="form-control"
+              style="height: 150px;"></textarea>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <label for="key"><i class=" fa fa-key"></i> Key</label>
+    <button class="btn btn-xs" id="generateKey" type="button"><i class="fa fa-random"></i> Generate</button>
+    <br/>
+    <textarea id="key" name="key" class="form-control" style="height: 150px;"></textarea>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <label><i class="fa fa-list-alt"></i> Method</label><br/>
+    <label for="method1" class="radio-inline">
+      <input type="radio" name="method" id="method1"/><i class="fa fa-lock"></i> Encrypt
+    </label>
+    <label for="method2" class="radio-inline">
+      <input type="radio" name="method" id="method2"/><i class="fa fa-unlock"></i> Decrypt
+    </label>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <label for="iterations"><i class="fa fa-repeat"></i> Iterations</label>
+    <select class="form-control" name="iterations" title="Iterations" id="iterations">
+      <option selected="selected">1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+      <option>9</option>
+      <option>10</option>
+    </select>
+  </div>
+  <div class="col-xs-12">
+    <button class="btn btn-primary btn-sm" id="go"><i class="fa fa-paper-plane"></i> Go!</button>
+  </div>
+
+  <div class="col-xs-12">
+    <label for="result"><i class="fa fa-check"></i> Result</label><br/>
+    <textarea id="result" class="form-control" style="height: 150px;"></textarea>
+  </div>
+</div>
+
+</body>
+</html>

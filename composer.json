@@ -1,0 +1,15 @@
+{
+  "name": "codecauldron/xor-encryption",
+  "description": "Simple XOR encryption in PHP",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jimmie Moberg",
+      "email": "jimmie@moberg.io"
+    }
+  ],
+  "require": {
+    "phpunit/phpunit": "^9.5.2"
+  }
+}
