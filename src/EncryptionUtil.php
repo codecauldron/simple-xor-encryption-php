@@ -1,5 +1,7 @@
 <?php
 
+namespace CodeCauldron\Security\Encryption;
+
 class EncryptionUtil
 {
     public static function encrypt(string $plainText, string $key): string
