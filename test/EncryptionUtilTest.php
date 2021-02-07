@@ -1,6 +1,7 @@
 <?php
 require_once "../src/EncryptionUtil.php";
 
+use CodeCauldron\Security\Encryption\EncryptionUtil;
 use PHPUnit\Framework\TestCase;
 
 class EncryptionUtilTest extends TestCase
