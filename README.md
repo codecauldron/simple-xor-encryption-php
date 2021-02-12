@@ -1,5 +1,6 @@
 # Simple XOR Encryption in PHP
-This is a demo for a simple example of XOR encryption
+This is a demo for a simple example of XOR encryption. 
+The code belongs to a tutorial that you can find [here](https://www.codecauldron.dev/2021/02/12/simple-xor-encryption-in-php/).
 ## Prerequisites
 * PHP 7.x 
 * composer (only needed to install dependencies for the unit tests)
